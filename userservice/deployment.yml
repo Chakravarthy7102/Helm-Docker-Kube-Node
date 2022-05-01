@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: userservice-deployment
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      server: userservice
+  template:
+    metadata:
+      labels:
+        server: userservice
+    spec:
+      containers:
+        - name: userservice
+          image: userservice:latest
+          imagePullPolicy: Never
+          resources: 
+            limits:
+              memory: "500Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 4000
+          env:
+            - name: NODE_ENV
+              value: production
+
+
+
+    

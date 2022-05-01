@@ -1,6 +1,6 @@
 FROM node:gallium-slim
 WORKDIR /app
-COPY package*.json .
+COPY package*.json /app/
 RUN npm install
 COPY userservice /app/userservice
 EXPOSE 4000

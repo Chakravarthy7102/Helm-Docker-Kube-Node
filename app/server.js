@@ -17,7 +17,7 @@ app.get("/ping", (req, res) => {
 });
 
 app.get("/api/users", async (req, res) => {
-  const response = await fetch("http://172.17.0.4:4000/v1/users");
+  const response = await fetch("http://userservice:4000/v1/users");
   const data = await response.json();
 
   return res.json({

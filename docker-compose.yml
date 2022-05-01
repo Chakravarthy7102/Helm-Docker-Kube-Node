@@ -1,0 +1,48 @@
+version: '3'
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: ./app/Dockerfile
+      args:
+        PORT: 3000
+    restart: always
+    volumes:
+      - ./app/server.js:/app/server.js
+      - ./package.json:/app/package.json
+    ports:
+      - 3000:3000
+    image: app
+    container_name: app
+    depends_on:
+      - userservice
+  server:
+    build: 
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    depends_on:
+      - app
+      - userservice
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/maintenance.html:/usr/share/nginx/html/maintenance.html
+    image: server
+    restart: always
+    container_name: server
+    ports:
+      - 80:80
+  userservice:
+    build: 
+      context: .
+      dockerfile: ./userservice/Dockerfile
+    restart: always
+    volumes:
+      - ./userservice/server.js:/app/userservice/server.js
+      - ./package.json:/app/package.json
+    image: userservice
+    container_name: userservice
+    ports:
+      - 4000:4000
+    
+
+    

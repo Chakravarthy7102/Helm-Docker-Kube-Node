@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: {{ .Values.app.name}}-deployment
+spec:
+  replicas: {{ .Values.app.replicas }}
+  # select the templete which matches the declared label.
+  selector:
+    matchLabels:
+      server: {{ .Values.app.name}}
+  template:
+    metadata:
+      labels:
+        server: {{ .Values.app.name}}
+    spec:
+      containers:
+        - name: {{ .Values.app.name}}
+          image: {{ .Values.app.image.name }}:{{ .Values.app.image.tag }}
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "500Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: {{ .Values.app.image.containerPort }}
+          env:
+            - name: NODE_ENV
+              value: {{ .Values.app.env.NODE_ENV }}

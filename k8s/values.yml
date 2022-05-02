@@ -1,0 +1,27 @@
+app: 
+  name: app
+  image:
+    name: app
+    tag: latest
+    containerPort: 3000
+  replicas: 3
+  env:
+    NODE_ENV: production
+  service: 
+    name: app-clusterip-service
+    port: 80
+    type: ClusterIP
+
+userservice:
+  name: userservice
+  image:
+    name: userservice
+    tag: latest
+    containerPorts: 4000
+  replicas: 2
+  env:
+    NODE_ENV: production
+  service: 
+    name: userservice-clusterip-service
+    port: 80
+    type: ClusterIP

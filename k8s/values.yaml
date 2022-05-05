@@ -13,7 +13,7 @@ app:
     type: ClusterIP
 
 userservice:
-  name: userservice
+  name: userservice1
   image:
     name: userservice
     tag: latest
@@ -25,3 +25,11 @@ userservice:
     name: userservice-clusterip-service
     port: 80
     type: ClusterIP
+nginx:
+  name: nginx
+  image:
+    name: server
+    tag: latest
+    containerPort: 80
+  replicas: 2
+  

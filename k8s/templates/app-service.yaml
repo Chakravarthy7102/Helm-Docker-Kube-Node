@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: "{ { .Values.app.service.name } }"
+
+spec:
+  type: "{ { .Values.app.service.type } }"
+
+  ports:
+    - port: "{ { .Values.app.service.port } }"
+      targetPort: "{ { .Values.app.image.containerPort } }"
+  selector:
+    server: "{ { .Values.app.name } }"

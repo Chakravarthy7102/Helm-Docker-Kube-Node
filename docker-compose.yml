@@ -36,9 +36,9 @@ services:
       context: .
       dockerfile: ./userservice/Dockerfile
     restart: always
-    volumes:
-      - ./userservice/server.js:/app/userservice/server.js
-      - ./package.json:/app/package.json
+    # volumes:
+    #   - ./userservice/server.js:/app/userservice/server.js
+    #   - ./package.json:/app/package.json
     image: userservice
     container_name: userservice
     ports:

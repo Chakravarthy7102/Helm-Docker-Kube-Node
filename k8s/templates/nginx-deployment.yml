@@ -2,27 +2,27 @@ apiVersion: apps/v1
 kind: Deployment 
 
 metadata:
-  name: nginx-deployment
+  name: {{.Values.nginx.name}}-deployment
 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      server: nginx
+      server: {{.Values.nginx.name}}
   template:
     metadata:
       labels:
-        server: nginx
+        server: {{.Values.nginx.name}}
     spec:
       containers:
-        - name: nginx
-          image: server:latest
+        - name: {{.Values.nginx.name}}
+          image: {{.Values.nginx.image.name}}:{{.Values.nginx.image.tag}}
           imagePullPolicy: Never
           resources:
             limits:
               memory: "500Mi"
               cpu: "500m"
           ports:
-            - containerPort: 80
+            - containerPort: {{.Values.nginx.image.containerPort}}
 
     

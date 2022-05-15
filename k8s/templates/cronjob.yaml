@@ -5,6 +5,8 @@ metadata:
   labels:
     name: cronjob
 spec:
+  suspend: false
+  successfulJobsHistoryLimit: 1
   schedule: "* * * * *"
   jobTemplate:
     spec:

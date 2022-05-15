@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nginx-job
+  labels:
+    name: nginx-job
+spec:
+  #   ttlSecondsAfterFinished: 100
+  activeDeadlineSeconds: 10
+  backoffLimit: 5
+  completions: 1
+  parallelism: 1
+  template:
+    spec:
+      containers:
+        - image: app:latest
+          name: nginx-job
+          imagePullPolicy: Never
+          command: ["sleep", "20"]
+      restartPolicy: Never

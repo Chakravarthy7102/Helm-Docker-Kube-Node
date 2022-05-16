@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox-deployment
+spec:
+  selector:
+    matchLabels:
+      app: busybox
+  replicas: 10 # amount of pods must be > 1
+  template:
+    metadata:
+      labels:
+        app: busybox
+    spec:
+      containers:
+        - name: busybox
+          image: busybox
+          command:
+            - sleep
+            - "infinity"
+          volumeMounts:
+            - mountPath: /app/folder
+              name: volume
+      volumes:
+        - name: volume
+          persistentVolumeClaim:
+            claimName: persistent-volume-claim

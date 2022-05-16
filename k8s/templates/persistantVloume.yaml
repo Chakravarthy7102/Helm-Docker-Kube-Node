@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+
+metadata:
+  name: persistant-example
+  labels:
+    name: perisistant-1
+spec:
+  storageClassName: local-fast
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/kube"

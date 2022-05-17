@@ -1,0 +1,94 @@
+############## CONFIGMAP AS  VOLUMES ##############
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busy-box
+spec:
+  containers:
+    - name: busybox
+      image: busybox:latest
+      imagePullPolicy: Never
+      command:
+        - sleep
+        - "infinity"
+      volumeMounts:
+        - name: config-vol
+          mountPath: /config
+  volumes:
+    - name: config-vol
+      configMap:
+        name: configmap-demo
+############## CONFIGMAP AS ENV  ##############
+
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: busy-box
+# spec:
+#   containers:
+#     - name: busy-box
+#       image: busybox:latest
+#       imagePullPolicy: Never
+#       command:
+#         - sleep
+#         - "infinity"
+#       env:
+#         - name: NAME
+#           valueFrom:
+#             configMapKeyRef:
+#               name: configmap-demo
+#               key: name
+#         - name: URL_HEADER
+#           valueFrom:
+#             configMapKeyRef:
+#               name: configmap-demo
+#               key: url_header
+############## SECRETS AS ENV ##############
+
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: busy-box
+# spec:
+#   containers:
+#     - name: busy-box
+#       image: busybox:latest
+#       imagePullPolicy: Never
+#       command:
+#         - sleep
+#         - "infinity"
+#       env:
+#         - name: USER_NAME
+#           valueFrom:
+#             secretKeyRef:
+#               name: secret-example
+#               key: USER_NAME
+#               optional: false
+#         - name: PASSWORD
+#           valueFrom:
+#             secretKeyRef:
+#               name: secret-example
+#               key: PASSWORD
+#               optional: false
+############## SECRETS AS MOUNTED VOLUMES ##############
+
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: busy-box
+
+# spec:
+#   containers:
+#     - name: busy-box
+#       image: busybox:latest
+#       imagePullPolicy: Never
+#       command:
+#         - sleep
+#         - "infinity"
+#       volumeMounts:
+#         - name: secret-volume
+#           mountPath: /secret
+#   volumes:
+#     - name: secret-volume
+#       secret:
+#         secretName: secret-example

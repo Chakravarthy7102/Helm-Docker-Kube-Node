@@ -1,0 +1,12 @@
+# ConfigMap does not provide secrecy or encryption. If the data you want to store are confidential, use a Secret rather than a ConfigMap, or use additional (third party) tools to keep your data private.
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-demo
+
+data:
+  name: "akira sama2"
+  new: "beandnewfortest"
+  url_header: "localhost:3000"
+  no_of_lives: "3"
